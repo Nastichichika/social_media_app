@@ -3,11 +3,12 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import multer from "multer";
-import helmet from "helmet";
-import morgan from "morgan";
+import multer from "multer"; // file import
+import helmet from "helmet"; // HTTP headers, security
+import morgan from "morgan"; // HTTP logging
 import path from "path";
 import { fileURLToPath } from "url";
+import { register } from "./controllers/auth";
 
 // config
 const __filename = fileURLToPath(import.meta.url);
@@ -34,9 +35,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// routers
+// routers with files
 app.post("/auth/register", upload.single("picture"), register);
-// app.post("/auth/login", upload.single(""), register);
 
 // mongoose setup
 const PORT = process.env.PORT || 6001;
