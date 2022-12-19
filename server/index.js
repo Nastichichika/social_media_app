@@ -9,7 +9,8 @@ import morgan from "morgan"; // HTTP logging
 import path from "path";
 import { fileURLToPath } from "url";
 import { register } from "./controllers/auth";
-import { routes as authRoutes} from "./routes/auth.js";
+import { routes as authRoutes} from "./routes/auth";
+import { routes as userRoutes} from "./routes/user";
 
 // config
 const __filename = fileURLToPath(import.meta.url);
@@ -41,6 +42,7 @@ app.post("/auth/register", upload.single("picture"), register);
 
 // routers
 app.post("/login", authRoutes);
+app.post("/users", userRoutes);
 
 // mongoose setup
 const PORT = process.env.PORT || 6001;
